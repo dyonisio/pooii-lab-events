@@ -1,7 +1,5 @@
 package com.facens.pooii.lab.ac1.ac1.services;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +17,7 @@ public class EventService {
     private EventRepository repo;
 
     public List<EventDTO> getEvents(){
-        List<Event> list = repo.getEvents();
+        List<Event> list = repo.findAll();
         List<EventDTO> listDTO = new ArrayList<>();
 
         for(Event e : list){
@@ -32,7 +30,7 @@ public class EventService {
                 e.getEndDate(),
                 e.getStartTime(),
                 e.getEndTime(),
-                e.getEmailContact()
+                e.getEmailContact() 
             );
             listDTO.add(dto);
         }

@@ -1,12 +1,8 @@
 package com.facens.pooii.lab.ac1.ac1.controllers;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.facens.pooii.lab.ac1.ac1.dtos.EventDTO;
-import com.facens.pooii.lab.ac1.ac1.entities.Event;
 import com.facens.pooii.lab.ac1.ac1.services.EventService;
 
 import org.springframework.beans.factory.annotation.Autowired;
