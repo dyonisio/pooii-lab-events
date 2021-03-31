@@ -7,6 +7,8 @@ import com.facens.pooii.lab.ac1.ac1.dtos.EventDTO;
 import com.facens.pooii.lab.ac1.ac1.dtos.EventInsertDTO;
 import com.facens.pooii.lab.ac1.ac1.dtos.EventUpdateDTO;
 import com.facens.pooii.lab.ac1.ac1.services.EventService;
+import com.facens.pooii.lab.ac1.ac1.utils.FilterRequest;
+import com.facens.pooii.lab.ac1.ac1.utils.FiltersRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -36,12 +38,17 @@ public class EventController {
         @RequestParam(value = "page", defaultValue = "0") Integer page,
         @RequestParam(value = "linesPerPage", defaultValue = "6") Integer linesPerPage,
         @RequestParam(value = "direction", defaultValue = "ASC") String direction,
-        @RequestParam(value = "orderBy", defaultValue = "id") String orderBy
+        @RequestParam(value = "orderBy", defaultValue = "id") String orderBy,
+        @RequestParam(value = "name", defaultValue = "") String name,
+        @RequestParam(value = "place", defaultValue = "") String place,
+        @RequestParam(value = "startDate", defaultValue = "1900-01-01") String startDate,
+        @RequestParam(value = "description", defaultValue = "") String description
     ){
 
         PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+        FilterRequest filterRequest = FilterRequest.of(name, place, startDate, description);
 
-        Page<EventDTO> list = service.getEvents(pageRequest);
+        Page<EventDTO> list = service.getEvents(pageRequest, filterRequest);
         return ResponseEntity.ok(list);
     }
 

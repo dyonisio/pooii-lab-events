@@ -11,6 +11,7 @@ import com.facens.pooii.lab.ac1.ac1.dtos.EventInsertDTO;
 import com.facens.pooii.lab.ac1.ac1.dtos.EventUpdateDTO;
 import com.facens.pooii.lab.ac1.ac1.entities.Event;
 import com.facens.pooii.lab.ac1.ac1.repositories.EventRepository;
+import com.facens.pooii.lab.ac1.ac1.utils.FilterRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -26,8 +27,8 @@ public class EventService {
     @Autowired
     private EventRepository repo;
 
-    public Page<EventDTO> getEvents(PageRequest pageRequest){
-        Page<Event> list = repo.find(pageRequest);
+    public Page<EventDTO> getEvents(PageRequest pageRequest, FilterRequest filterRequest){
+        Page<Event> list = repo.find(pageRequest, filterRequest.getName(), filterRequest.getPlace(), filterRequest.getStartDate(), filterRequest.getDescription());
         return list.map( e -> new EventDTO(e));
     }
 
