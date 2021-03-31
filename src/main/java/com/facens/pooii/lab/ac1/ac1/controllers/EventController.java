@@ -1,14 +1,12 @@
 package com.facens.pooii.lab.ac1.ac1.controllers;
 
 import java.net.URI;
-import java.util.List;
 
 import com.facens.pooii.lab.ac1.ac1.dtos.EventDTO;
 import com.facens.pooii.lab.ac1.ac1.dtos.EventInsertDTO;
 import com.facens.pooii.lab.ac1.ac1.dtos.EventUpdateDTO;
 import com.facens.pooii.lab.ac1.ac1.services.EventService;
 import com.facens.pooii.lab.ac1.ac1.utils.FilterRequest;
-import com.facens.pooii.lab.ac1.ac1.utils.FiltersRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

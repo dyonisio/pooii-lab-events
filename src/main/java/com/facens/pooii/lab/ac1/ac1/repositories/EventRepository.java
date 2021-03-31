@@ -2,7 +2,6 @@ package com.facens.pooii.lab.ac1.ac1.repositories;
 import java.time.LocalDate;
 
 import com.facens.pooii.lab.ac1.ac1.entities.Event;
-import com.facens.pooii.lab.ac1.ac1.utils.FilterRequest;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
