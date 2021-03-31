@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.facens.pooii.lab.ac1.ac1.dtos.EventDTO;
+import com.facens.pooii.lab.ac1.ac1.dtos.EventInsertDTO;
 import com.facens.pooii.lab.ac1.ac1.entities.Event;
 import com.facens.pooii.lab.ac1.ac1.repositories.EventRepository;
 
@@ -29,6 +30,12 @@ public class EventService {
         Event eve = op.orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Event not found"));
 
         return new EventDTO(eve);
+    }
+
+    public EventDTO insert(EventInsertDTO dto){
+        Event entity = new Event(dto);
+        entity = repo.save(entity);
+        return new EventDTO(entity);
     }
 
     public List<EventDTO> toDTOList(List<Event> list){
