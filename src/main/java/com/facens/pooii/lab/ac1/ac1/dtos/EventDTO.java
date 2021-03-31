@@ -3,6 +3,8 @@ package com.facens.pooii.lab.ac1.ac1.dtos;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import com.facens.pooii.lab.ac1.ac1.entities.Event;
+
 public class EventDTO {
     private Long id;
     private String name;
@@ -30,6 +32,19 @@ public class EventDTO {
                 this.endTime = endTime;
                 this.emailContact = emailContact;
     }
+    
+    public EventDTO(Event eve) {
+        this.id = eve.getId();
+        this.name = eve.getName();
+        this.description = eve.getDescription();
+        this.place = eve.getPlace();
+        this.startDate = eve.getStartDate();
+        this.endDate = eve.getEndDate();
+        this.startTime = eve.getStartTime();
+        this.endTime = eve.getEndTime();
+        this.emailContact = eve.getEmailContact();
+    }
+
     public Long getId() {
         return id;
     }
