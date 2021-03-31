@@ -10,6 +10,7 @@ import com.facens.pooii.lab.ac1.ac1.entities.Event;
 import com.facens.pooii.lab.ac1.ac1.repositories.EventRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -36,6 +37,14 @@ public class EventService {
         Event entity = new Event(dto);
         entity = repo.save(entity);
         return new EventDTO(entity);
+    }
+
+    public void delete(Long id){
+        try{
+            repo.deleteById(id);
+        }catch(EmptyResultDataAccessException e){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Event not found");
+        }
     }
 
     public List<EventDTO> toDTOList(List<Event> list){
