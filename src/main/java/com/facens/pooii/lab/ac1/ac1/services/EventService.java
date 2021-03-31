@@ -14,6 +14,8 @@ import com.facens.pooii.lab.ac1.ac1.repositories.EventRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -24,9 +26,9 @@ public class EventService {
     @Autowired
     private EventRepository repo;
 
-    public List<EventDTO> getEvents(){
-        List<Event> list = repo.findAll();
-        return toDTOList(list);
+    public Page<EventDTO> getEvents(PageRequest pageRequest){
+        Page<Event> list = repo.find(pageRequest);
+        return list.map( e -> new EventDTO(e));
     }
 
     public EventDTO getClientById(Long id){
