@@ -11,6 +11,7 @@ import com.facens.pooii.lab.ac1.ac1.dtos.EventInsertDTO;
 import com.facens.pooii.lab.ac1.ac1.dtos.EventUpdateDTO;
 import com.facens.pooii.lab.ac1.ac1.entities.Event;
 import com.facens.pooii.lab.ac1.ac1.repositories.EventRepository;
+import com.facens.pooii.lab.ac1.ac1.utils.DateTimeValidation;
 import com.facens.pooii.lab.ac1.ac1.utils.FilterRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,8 @@ public class EventService {
     }
 
     public EventDTO insert(EventInsertDTO dto){
+        DateTimeValidation.valide(dto.getStartDate(), dto.getEndDate(), dto.getStartTime(), dto.getEndTime());
+        
         Event entity = new Event(dto);
         entity = repo.save(entity);
         return new EventDTO(entity);

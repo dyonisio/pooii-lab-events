@@ -6,6 +6,7 @@ import com.facens.pooii.lab.ac1.ac1.dtos.EventDTO;
 import com.facens.pooii.lab.ac1.ac1.dtos.EventInsertDTO;
 import com.facens.pooii.lab.ac1.ac1.dtos.EventUpdateDTO;
 import com.facens.pooii.lab.ac1.ac1.services.EventService;
+import com.facens.pooii.lab.ac1.ac1.utils.DateTimeValidation;
 import com.facens.pooii.lab.ac1.ac1.utils.FilterRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +43,6 @@ public class EventController {
         @RequestParam(value = "startDate", defaultValue = "1900-01-01") String startDate,
         @RequestParam(value = "description", defaultValue = "") String description
     ){
-
         PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
         FilterRequest filterRequest = FilterRequest.of(name, place, startDate, description);
 
@@ -59,6 +59,7 @@ public class EventController {
     @PostMapping
     public ResponseEntity<EventDTO> insert(@RequestBody EventInsertDTO insertDto){
         EventDTO dto = service.insert(insertDto);
+
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
         return ResponseEntity.created(uri).body(dto);
     }

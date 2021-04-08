@@ -2,6 +2,10 @@ package com.facens.pooii.lab.ac1.ac1.dtos;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 
 public class EventInsertDTO {
     private String name;
@@ -34,8 +38,12 @@ public class EventInsertDTO {
     public LocalDate getStartDate() {
         return startDate;
     }
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
+    public void setStartDate(String startDate) {
+        try {
+            this.startDate = LocalDate.parse(startDate, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid date format, please insert date pattern (yyyy-MM-dd)");
+        }
     }
     public LocalDate getEndDate() {
         return endDate;

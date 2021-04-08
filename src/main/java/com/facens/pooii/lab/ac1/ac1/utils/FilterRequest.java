@@ -1,6 +1,10 @@
 package com.facens.pooii.lab.ac1.ac1.utils;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 
 public class FilterRequest {
     private String name;
@@ -13,6 +17,11 @@ public class FilterRequest {
     public FilterRequest(String name, String place, String startDate, String description) {
 		this.name = name;
 		this.place = place;
+		try {
+            this.startDate = LocalDate.parse(startDate, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid date format, please insert date pattern (yyyy-MM-dd)");
+        }
 		this.startDate = LocalDate.parse(startDate);
 		this.description = description;
 	}
