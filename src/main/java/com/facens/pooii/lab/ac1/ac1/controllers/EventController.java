@@ -2,6 +2,8 @@ package com.facens.pooii.lab.ac1.ac1.controllers;
 
 import java.net.URI;
 
+import javax.validation.Valid;
+
 import com.facens.pooii.lab.ac1.ac1.dtos.EventDTO;
 import com.facens.pooii.lab.ac1.ac1.dtos.EventInsertDTO;
 import com.facens.pooii.lab.ac1.ac1.dtos.EventUpdateDTO;
@@ -57,7 +59,7 @@ public class EventController {
     }
 
     @PostMapping
-    public ResponseEntity<EventDTO> insert(@RequestBody EventInsertDTO insertDto){
+    public ResponseEntity<EventDTO> insert(@Valid @RequestBody EventInsertDTO insertDto){
         EventDTO dto = service.insert(insertDto);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
@@ -71,7 +73,7 @@ public class EventController {
     }
 
     @PutMapping("{id}") 
-    public ResponseEntity<EventDTO> update(@PathVariable Long id, @RequestBody EventUpdateDTO updateDto){
+    public ResponseEntity<EventDTO> update(@PathVariable Long id, @Valid @RequestBody EventUpdateDTO updateDto){
         EventDTO dto = service.update(id, updateDto);
         return ResponseEntity.ok().body(dto);
     }
