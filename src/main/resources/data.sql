@@ -14,7 +14,7 @@ INSERT INTO TB_ATTEND (base_user_id, balance) VALUES (2, 100.00)
 INSERT INTO TB_ATTEND (base_user_id, balance) VALUES (3, 0.00)
 
 INSERT INTO TB_EVENT (name, description, start_date, end_date, start_time, end_time, email_contact, amount_free_tickets, amount_payed_tickets, price_ticket, admin_base_user_id) VALUES ('Carnaval', 'Todo mundo pulando fantasiado!', '2022-02-26', '2022-03-01', '00:00', '23:59', 'prefeitura@sp.gov.br', 100, 50, 20, 1)
-INSERT INTO TB_EVENT (name, description, start_date, end_date, start_time, end_time, email_contact, amount_free_tickets, amount_payed_tickets, price_ticket, admin_base_user_id) VALUES ('Festa Junina', 'Doces, quadrilha e muito mais!', '2022-06-01', '2022-06-3', '19:00', '23:59', 'condominio@sp.gov.br', 50, 75, 10, 2)
+INSERT INTO TB_EVENT (name, description, start_date, end_date, start_time, end_time, email_contact, amount_free_tickets, amount_payed_tickets, price_ticket, admin_base_user_id) VALUES ('Festa Junina', 'Doces, quadrilha e muito mais!', '2022-06-01', '2022-06-03', '19:00', '23:59', 'condominio@sp.gov.br', 50, 75, 10, 2)
 INSERT INTO TB_EVENT (name, description, start_date, end_date, start_time, end_time, email_contact, amount_free_tickets, amount_payed_tickets, price_ticket, admin_base_user_id) VALUES ('Ano Novo', 'O seu ano atual + 1!', '2023-01-01', '2023-01-01', '00:00', '23:59', 'carinha@sp.gov.br', 0, 200, 100, 3)
 
 INSERT INTO TB_PLACE (name, address) VALUES ('Parque Ibirapuera', 'Avenida Pedro Álvares Cabral, Sao Paulo, SP, 04094-050')
