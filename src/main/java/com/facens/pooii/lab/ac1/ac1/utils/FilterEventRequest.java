@@ -6,28 +6,33 @@ import java.time.format.DateTimeFormatter;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 
-public class FilterRequest {
+public class FilterEventRequest {
     private String name;
 	private String place;
 	private LocalDate startDate;
+	private Double priceTicket;
 	private String description;
 
-	public FilterRequest(){}
+	public FilterEventRequest(){}
 
-    public FilterRequest(String name, String place, String startDate, String description) {
+    public FilterEventRequest(String name, String startDate, String description, String priceTicket) {
 		this.name = name;
-		this.place = place;
 		try {
             this.startDate = LocalDate.parse(startDate, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        } catch (Exception e) {
+			this.priceTicket = Double.parseDouble(priceTicket);
+        } catch (NumberFormatException e) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Por favor, insira somente números");
+		} catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid date format, please insert date pattern (yyyy-MM-dd)");
         }
+
+		this.priceTicket = Double.parseDouble(priceTicket);
 		this.startDate = LocalDate.parse(startDate);
 		this.description = description;
 	}
 
-	public static FilterRequest of(String name, String place, String startDate, String description) {
-		return new FilterRequest(name, place, startDate, description);
+	public static FilterEventRequest of(String name, String startDate, String description, String priceTicket) {
+		return new FilterEventRequest(name, startDate, description, priceTicket);
 	}
 
 	public String getName() {
@@ -62,5 +67,11 @@ public class FilterRequest {
 		this.description = description;
 	}
 
-	
+	public Double getPriceTicket() {
+		return priceTicket;
+	}
+
+	public void setPriceTicket(Double priceTicket) {
+		this.priceTicket = priceTicket;
+	}
 }
