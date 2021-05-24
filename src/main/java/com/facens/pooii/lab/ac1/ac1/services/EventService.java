@@ -66,6 +66,8 @@ public class EventService {
     }
 
     public EventDTO update(Long id, EventUpdateDTO dto){
+        DateTimeValidation.valide(dto.getStartDate(), dto.getEndDate(), dto.getStartTime(), dto.getEndTime());
+
         try{
             Event entity = repo.getOne(id);
 
