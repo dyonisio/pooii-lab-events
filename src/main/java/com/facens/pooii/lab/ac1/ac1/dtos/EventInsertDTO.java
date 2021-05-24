@@ -17,9 +17,6 @@ public class EventInsertDTO {
     @NotNull(message = "Descrição é obrigatório")
     @NotBlank(message = "Descrição não pode estar em branco")
     private String description;
-    @NotNull(message = "Lugar é obrigatório")
-    @NotBlank(message = "Place não pode estar em branco")
-    private String place;
     @NotNull(message = "Data de Inicio é obrigatório")
     private LocalDate startDate;
     @NotNull(message = "Data de Fim é obrigatório")
@@ -31,6 +28,14 @@ public class EventInsertDTO {
     @NotNull(message = "Email contato é obrigatório")
     @NotBlank(message = "Email de contato não pode estar em branco")
     private String emailContact;
+    @NotNull(message = "É necessário informar o tickets de graça disponíveis")
+    private Long amountFreeTickets;
+    @NotNull(message = "É necessário informar o tickets pagos disponíveis")
+    private Long amountPayedTickets;
+    @NotNull(message = "É necessário informar o preço dos tickets")
+    private Double priceTicket;
+    @NotNull(message = "É necessário passar o ID de um admin")
+    private Long idAdmin;
 
     public String getName() {
         return name;
@@ -43,12 +48,6 @@ public class EventInsertDTO {
     }
     public void setDescription(String description) {
         this.description = description;
-    }
-    public String getPlace() {
-        return place;
-    }
-    public void setPlace(String place) {
-        this.place = place;
     }
     public LocalDate getStartDate() {
         return startDate;
@@ -84,4 +83,29 @@ public class EventInsertDTO {
     public void setEmailContact(String emailContact) {
         this.emailContact = emailContact;
     }
+    public Long getIdAdmin() {
+        return idAdmin;
+    }
+    public void setIdAdmin(Long id_Admin) {
+        this.idAdmin = id_Admin;
+    }
+    public Long getAmountFreeTickets() {
+        return amountFreeTickets;
+    }
+    public void setAmountFreeTickets(Long amountFreeTickets) {
+        this.amountFreeTickets = amountFreeTickets;
+    }
+    public Long getAmountPayedTickets() {
+        return amountPayedTickets;
+    }
+    public void setAmountPayedTickets(Long amountPayedTickets) {
+        this.amountPayedTickets = amountPayedTickets;
+    }
+    public Double getPriceTicket() {
+        return priceTicket;
+    }
+    public void setPriceTicket(Double priceTicket) {
+        this.priceTicket = priceTicket;
+    }
+    
 }

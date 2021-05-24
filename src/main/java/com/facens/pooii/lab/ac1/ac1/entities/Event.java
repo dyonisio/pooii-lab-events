@@ -3,11 +3,16 @@ package com.facens.pooii.lab.ac1.ac1.entities;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.facens.pooii.lab.ac1.ac1.dtos.EventInsertDTO;
@@ -22,12 +27,21 @@ public class Event implements Serializable {
     private Long id;
     private String name;
     private String description;
-    private String place;
     private LocalDate startDate;
     private LocalDate endDate;
     private LocalTime startTime;
     private LocalTime endTime;
     private String emailContact;
+    private Long amountFreeTickets;
+    private Long amountPayedTickets;
+    private Double priceTicket;
+
+    @ManyToOne
+    @JoinColumn(name="ADMIN_BASE_USER_ID")
+    private Admin admin;
+
+    @ManyToMany
+    private List<Place> places = new ArrayList<>();
 
     public Event(){
         
@@ -36,12 +50,14 @@ public class Event implements Serializable {
     public Event(EventInsertDTO dto) {
         this.name = dto.getName();
         this.description = dto.getDescription();
-        this.place = dto.getPlace();
         this.startDate = dto.getStartDate();
         this.endDate = dto.getEndDate();
         this.startTime = dto.getStartTime();
         this.endTime = dto.getEndTime();
         this.emailContact = dto.getEmailContact();
+        this.amountFreeTickets = dto.getAmountFreeTickets();
+        this.amountPayedTickets = dto.getAmountPayedTickets();
+        this.priceTicket = dto.getPriceTicket();
     }
 
     public Long getId() {
@@ -61,12 +77,6 @@ public class Event implements Serializable {
     }
     public void setDescription(String description) {
         this.description = description;
-    }
-    public String getPlace() {
-        return place;
-    }
-    public void setPlace(String place) {
-        this.place = place;
     }
     public LocalDate getStartDate() {
         return startDate;
@@ -97,6 +107,46 @@ public class Event implements Serializable {
     }
     public void setEmailContact(String emailContact) {
         this.emailContact = emailContact;
+    }
+
+    public Long getAmountFreeTickets() {
+        return amountFreeTickets;
+    }
+
+    public void setAmountFreeTickets(Long amountFreeTickets) {
+        this.amountFreeTickets = amountFreeTickets;
+    }
+
+    public Long getAmountPayedTickets() {
+        return amountPayedTickets;
+    }
+
+    public void setAmountPayedTickets(Long amountPayedTickets) {
+        this.amountPayedTickets = amountPayedTickets;
+    }
+
+    public Double getPriceTicket() {
+        return priceTicket;
+    }
+
+    public void setPriceTicket(Double priceTicket) {
+        this.priceTicket = priceTicket;
+    }
+
+    public List<Place> getPlaces(){
+        return places;
+    }
+
+    public void addPlace(Place place) {
+        this.places.add(place);
+    }
+
+    public Admin getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(Admin admin) {
+        this.admin = admin;
     }
 
     @Override

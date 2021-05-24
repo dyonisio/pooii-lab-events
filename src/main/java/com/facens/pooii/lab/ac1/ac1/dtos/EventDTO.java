@@ -2,30 +2,38 @@ package com.facens.pooii.lab.ac1.ac1.dtos;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
+import com.facens.pooii.lab.ac1.ac1.entities.Admin;
 import com.facens.pooii.lab.ac1.ac1.entities.Event;
+import com.facens.pooii.lab.ac1.ac1.entities.Place;
 
 public class EventDTO {
     private Long id;
     private String name;
     private String description;
-    private String place;
     private LocalDate startDate;
     private LocalDate endDate;
     private LocalTime startTime;
     private LocalTime endTime;
     private String emailContact;
+    private Long amountFreeTickets;
+    private Long amountPayedTickets;
+    private Double priceTicket;
+    private Admin admin = new Admin();
+    private List<Place> places = new ArrayList<>();
 
     public EventDTO(){
 
     }
 
-    public EventDTO(Long id, String name, String description, String place, LocalDate startDate,
-            LocalDate endDate, LocalTime startTime, LocalTime endTime, String emailContact) {
+    public EventDTO(Long id, String name, String description, LocalDate startDate,
+            LocalDate endDate, LocalTime startTime, LocalTime endTime, String emailContact, Long amountFreeTickets,
+            Long amoundPayedTickets, Double priceTicket) {
                 this.id = id;
                 this.name = name;
                 this.description = description;
-                this.place = place;
                 this.startDate = startDate;
                 this.endDate = endDate;
                 this.startTime = startTime;
@@ -37,12 +45,15 @@ public class EventDTO {
         this.id = eve.getId();
         this.name = eve.getName();
         this.description = eve.getDescription();
-        this.place = eve.getPlace();
         this.startDate = eve.getStartDate();
         this.endDate = eve.getEndDate();
         this.startTime = eve.getStartTime();
         this.endTime = eve.getEndTime();
         this.emailContact = eve.getEmailContact();
+        this.amountFreeTickets = eve.getAmountFreeTickets();
+        this.amountPayedTickets = eve.getAmountPayedTickets();
+        this.priceTicket = eve.getPriceTicket();
+        this.admin = eve.getAdmin();
     }
 
     public Long getId() {
@@ -62,12 +73,6 @@ public class EventDTO {
     }
     public void setDescription(String description) {
         this.description = description;
-    }
-    public String getPlace() {
-        return place;
-    }
-    public void setPlace(String place) {
-        this.place = place;
     }
     public LocalDate getStartDate() {
         return startDate;
@@ -98,5 +103,44 @@ public class EventDTO {
     }
     public void setEmailContact(String emailContact) {
         this.emailContact = emailContact;
+    }
+
+    public Long getAmountFreeTickets() {
+        return amountFreeTickets;
+    }
+
+    public void setAmountFreeTickets(Long amountFreeTickets) {
+        this.amountFreeTickets = amountFreeTickets;
+    }
+
+    public Long getAmountPayedTickets() {
+        return amountPayedTickets;
+    }
+
+    public void setAmountPayedTickets(Long amountPayedTickes) {
+        this.amountPayedTickets = amountPayedTickes;
+    }
+
+    public Double getPriceTicket() {
+        return priceTicket;
+    }
+
+    public void setPriceTicket(Double priceTicket) {
+        this.priceTicket = priceTicket;
+    }
+
+    public Admin getAdmin() {
+        return admin;
+    }
+    public void setAdmin(Admin admin) {
+        this.admin = admin;
+    }
+
+    public List<Place> getPlaces() {
+        return places;
+    }
+
+    public void setPlaces(List<Place> places) {
+        this.places = places;
     }
 }

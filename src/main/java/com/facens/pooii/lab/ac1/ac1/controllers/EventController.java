@@ -8,8 +8,7 @@ import com.facens.pooii.lab.ac1.ac1.dtos.EventDTO;
 import com.facens.pooii.lab.ac1.ac1.dtos.EventInsertDTO;
 import com.facens.pooii.lab.ac1.ac1.dtos.EventUpdateDTO;
 import com.facens.pooii.lab.ac1.ac1.services.EventService;
-import com.facens.pooii.lab.ac1.ac1.utils.DateTimeValidation;
-import com.facens.pooii.lab.ac1.ac1.utils.FilterRequest;
+import com.facens.pooii.lab.ac1.ac1.utils.FilterEventRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -41,12 +40,12 @@ public class EventController {
         @RequestParam(value = "direction", defaultValue = "ASC") String direction,
         @RequestParam(value = "orderBy", defaultValue = "id") String orderBy,
         @RequestParam(value = "name", defaultValue = "") String name,
-        @RequestParam(value = "place", defaultValue = "") String place,
         @RequestParam(value = "startDate", defaultValue = "1900-01-01") String startDate,
-        @RequestParam(value = "description", defaultValue = "") String description
+        @RequestParam(value = "description", defaultValue = "") String description,
+        @RequestParam(value = "priceTicket", defaultValue = "99999999") String priceTicket
     ){
         PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
-        FilterRequest filterRequest = FilterRequest.of(name, place, startDate, description);
+        FilterEventRequest filterRequest = FilterEventRequest.of(name, startDate, description, priceTicket);
 
         Page<EventDTO> list = service.getEvents(pageRequest, filterRequest);
         return ResponseEntity.ok(list);

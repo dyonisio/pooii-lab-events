@@ -9,10 +9,12 @@ import javax.persistence.EntityNotFoundException;
 import com.facens.pooii.lab.ac1.ac1.dtos.EventDTO;
 import com.facens.pooii.lab.ac1.ac1.dtos.EventInsertDTO;
 import com.facens.pooii.lab.ac1.ac1.dtos.EventUpdateDTO;
+import com.facens.pooii.lab.ac1.ac1.entities.Admin;
 import com.facens.pooii.lab.ac1.ac1.entities.Event;
+import com.facens.pooii.lab.ac1.ac1.repositories.AdminRepository;
 import com.facens.pooii.lab.ac1.ac1.repositories.EventRepository;
 import com.facens.pooii.lab.ac1.ac1.utils.DateTimeValidation;
-import com.facens.pooii.lab.ac1.ac1.utils.FilterRequest;
+import com.facens.pooii.lab.ac1.ac1.utils.FilterEventRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -27,9 +29,11 @@ public class EventService {
 
     @Autowired
     private EventRepository repo;
+    @Autowired
+    private AdminRepository repoAdmin;
 
-    public Page<EventDTO> getEvents(PageRequest pageRequest, FilterRequest filterRequest){
-        Page<Event> list = repo.find(pageRequest, filterRequest.getName(), filterRequest.getPlace(), filterRequest.getStartDate(), filterRequest.getDescription());
+    public Page<EventDTO> getEvents(PageRequest pageRequest, FilterEventRequest filterRequest){
+        Page<Event> list = repo.find(pageRequest, filterRequest.getName(), filterRequest.getStartDate(), filterRequest.getDescription(), filterRequest.getPriceTicket());
         return list.map( e -> new EventDTO(e));
     }
 
@@ -42,8 +46,13 @@ public class EventService {
 
     public EventDTO insert(EventInsertDTO dto){
         DateTimeValidation.valide(dto.getStartDate(), dto.getEndDate(), dto.getStartTime(), dto.getEndTime());
-        
+
         Event entity = new Event(dto);
+
+        Optional<Admin> op = repoAdmin.findById(dto.getIdAdmin());        
+        Admin admin = op.orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Admin não existe"));
+        
+        entity.setAdmin(admin);
         entity = repo.save(entity);
         return new EventDTO(entity);
     }
@@ -61,7 +70,6 @@ public class EventService {
             Event entity = repo.getOne(id);
 
             entity.setDescription(dto.getDescription());
-            entity.setPlace(dto.getPlace());
             entity.setStartDate(dto.getStartDate());
             entity.setEndDate(dto.getEndDate());
             entity.setStartTime(dto.getStartTime());
@@ -82,12 +90,14 @@ public class EventService {
                 e.getId(),
                 e.getName(),
                 e.getDescription(),
-                e.getPlace(),
                 e.getStartDate(),
                 e.getEndDate(),
                 e.getStartTime(),
                 e.getEndTime(),
-                e.getEmailContact() 
+                e.getEmailContact(),
+                e.getAmountFreeTickets(),
+                e.getAmountPayedTickets(),
+                e.getPriceTicket()
             );
             listDTO.add(dto);
         }
