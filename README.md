@@ -50,3 +50,8 @@ EVENTS INSERT
 }
 ```
 
+
+## MODELO
+![alt text](https://i.imgur.com/ds3Zi2y.png)
+
+
