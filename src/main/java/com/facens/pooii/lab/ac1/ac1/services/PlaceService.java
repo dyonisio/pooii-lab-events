@@ -74,7 +74,8 @@ public class PlaceService {
             PlaceDTO dto = new PlaceDTO(
                 p.getId(),
                 p.getName(),
-                p.getAddress()
+                p.getAddress(),
+                p.getEvents()
             );
             listDTO.add(dto);
         }

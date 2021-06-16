@@ -75,7 +75,8 @@ public class AttendService {
                 a.getId(),
                 a.getName(),
                 a.getEmail(),
-                a.getBalance()
+                a.getBalance(),
+                a.getTickets()
             );
             listDTO.add(dto);
         }

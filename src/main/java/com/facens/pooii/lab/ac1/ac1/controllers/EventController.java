@@ -6,7 +6,9 @@ import javax.validation.Valid;
 
 import com.facens.pooii.lab.ac1.ac1.dtos.EventDTO;
 import com.facens.pooii.lab.ac1.ac1.dtos.EventInsertDTO;
+import com.facens.pooii.lab.ac1.ac1.dtos.EventTicketSellDTO;
 import com.facens.pooii.lab.ac1.ac1.dtos.EventUpdateDTO;
+import com.facens.pooii.lab.ac1.ac1.dtos.TicketDTO;
 import com.facens.pooii.lab.ac1.ac1.services.EventService;
 import com.facens.pooii.lab.ac1.ac1.utils.FilterEventRequest;
 
@@ -76,4 +78,39 @@ public class EventController {
         EventDTO dto = service.update(id, updateDto);
         return ResponseEntity.ok().body(dto);
     }
+
+    @GetMapping("{idEvent}/places/{idPlace}")
+    public ResponseEntity<EventDTO> addLocalEvent(@PathVariable Long idEvent, @PathVariable Long idPlace){
+        EventDTO dto = service.addLocalEvent(idEvent, idPlace);
+        return ResponseEntity.ok().body(dto);
+    }
+
+    @DeleteMapping("{idEvent}/places/{idPlace}")
+    public ResponseEntity<EventDTO> removeLocalEvent(@PathVariable Long idEvent, @PathVariable Long idPlace){
+        EventDTO dto = service.removeLocalEvent(idEvent, idPlace);
+        return ResponseEntity.ok().body(dto);
+    }
+
+    @PostMapping("{id}/tickets")
+    public ResponseEntity<EventDTO> sellTicket(@PathVariable Long id, @Valid @RequestBody EventTicketSellDTO insertDto){
+        EventDTO dto = service.sellTicket(insertDto, id);
+
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
+        return ResponseEntity.created(uri).body(dto);
+    }
+
+    @DeleteMapping("{id}/tickets")
+    public ResponseEntity<EventDTO> devolutionTicket(@PathVariable Long id, @Valid @RequestBody EventTicketSellDTO insertDto){
+        EventDTO dto = service.devolutionTicket(insertDto, id);
+
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
+        return ResponseEntity.created(uri).body(dto);
+    }
+
+    @GetMapping("{idEvent}/tickets")
+    public ResponseEntity<TicketDTO> getTickets(@PathVariable Long idEvent){
+        TicketDTO dto = service.getTickets(idEvent);
+        return ResponseEntity.ok().body(dto);
+    }
+
 }

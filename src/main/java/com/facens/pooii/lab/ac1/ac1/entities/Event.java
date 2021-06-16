@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.facens.pooii.lab.ac1.ac1.dtos.EventInsertDTO;
@@ -34,11 +35,16 @@ public class Event implements Serializable {
     private String emailContact;
     private Long amountFreeTickets;
     private Long amountPayedTickets;
+    private Long freeTicketsSelled = 0l;
+    private Long payedTicketsSelled = 0l;
     private Double priceTicket;
 
     @ManyToOne
     @JoinColumn(name="ADMIN_BASE_USER_ID")
     private Admin admin;
+
+    @OneToMany(mappedBy = "event")
+    private List<Ticket> tickets = new ArrayList<>();
 
     @ManyToMany
     private List<Place> places = new ArrayList<>();
@@ -125,6 +131,22 @@ public class Event implements Serializable {
         this.amountPayedTickets = amountPayedTickets;
     }
 
+    public Long getFreeTicketsSelled() {
+        return freeTicketsSelled;
+    }
+
+    public void setFreeTicketsSelled(Long freeTicketsSelled) {
+        this.freeTicketsSelled = freeTicketsSelled;
+    }
+
+    public Long getPayedTicketsSelled() {
+        return payedTicketsSelled;
+    }
+
+    public void setPayedTicketsSelled(Long payedTicketsSelled) {
+        this.payedTicketsSelled = payedTicketsSelled;
+    }
+
     public Double getPriceTicket() {
         return priceTicket;
     }
@@ -139,6 +161,22 @@ public class Event implements Serializable {
 
     public void addPlace(Place place) {
         this.places.add(place);
+    }
+
+    public void clearPlaces(){
+        this.places.clear();
+    }
+
+    public void addTicket(Ticket ticket) {
+        this.tickets.add(ticket);
+    }
+
+    public List<Ticket> getTickets(){
+        return tickets;
+    }
+
+    public void removeTicket(Ticket ticket){
+        tickets.remove(ticket);
     }
 
     public Admin getAdmin() {

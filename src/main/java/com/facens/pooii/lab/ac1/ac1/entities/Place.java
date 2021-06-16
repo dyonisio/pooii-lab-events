@@ -64,6 +64,10 @@ public class Place {
         this.events.add(event);
     }
 
+    public void clearEvents(){
+        this.events.clear();
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;

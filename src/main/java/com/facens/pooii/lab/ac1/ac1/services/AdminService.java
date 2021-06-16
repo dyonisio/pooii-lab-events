@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -39,7 +40,13 @@ public class AdminService {
         return new AdminDTO(admin);
     }
 
-    public AdminDTO insert(AdminInsertDTO dto){        
+    public AdminDTO insert(AdminInsertDTO dto){   
+        PageRequest pageRequest = PageRequest.of(0, 1, Direction.valueOf("ASC"), "id");
+        Page<Admin> list = repo.find(pageRequest, "", dto.getEmail(), "");
+
+        if(!list.isEmpty())
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email already in database");
+
         Admin entity = new Admin(dto);
         entity = repo.save(entity);
         return new AdminDTO(entity);

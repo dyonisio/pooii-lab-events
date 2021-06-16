@@ -10,7 +10,6 @@ public class AttendInsertDTO {
     @NotNull(message = "Email é obrigatório")
     @NotBlank(message = "Email não pode estar em branco")
     private String email;
-    private Double balance = 0d;
 
     public String getName() {
         return name;
@@ -23,11 +22,5 @@ public class AttendInsertDTO {
     }
     public void setEmail(String email) {
         this.email = email;
-    }
-    public Double getBalance() {
-        return balance;
-    }
-    public void setBalance(Double balance) {
-        this.balance = balance;
     }
 }
