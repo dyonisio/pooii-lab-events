@@ -2,7 +2,6 @@ package com.facens.pooii.lab.ac1.ac1.dtos;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.facens.pooii.lab.ac1.ac1.entities.Admin;

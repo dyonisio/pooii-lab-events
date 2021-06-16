@@ -14,7 +14,7 @@ import com.facens.pooii.lab.ac1.ac1.dtos.AttendInsertDTO;
 @Table(name="TB_ATTEND")
 @PrimaryKeyJoinColumn(name="BASE_USER_ID")
 public class Attend extends BaseUser{
-    private Double balance;
+    private Double balance = 0d;
 
     @OneToMany(mappedBy = "attend")
     private List<Ticket> tickets = new ArrayList<>();
