@@ -50,6 +50,17 @@ EVENTS INSERT
 }
 ```
 
+BUY TICKET
+```
+{
+    "idAttend": 6,
+    "typeTicket": "PAYED"
+}
+```
+
+## POSTMAN ROTAS
+![alt text](https://i.imgur.com/HyolxTK.png)
+
 
 ## MODELO
 ![alt text](https://i.imgur.com/ds3Zi2y.png)
