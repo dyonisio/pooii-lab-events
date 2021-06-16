@@ -10,7 +10,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.facens.pooii.lab.ac1.ac1.utils.TicketType;
-import com.facens.pooii.lab.ac1.ac1.utils.TicketType.ticketType;
 
 @Entity
 @Table(name="TB_TICKET")
